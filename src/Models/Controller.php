@@ -6,7 +6,7 @@
  * Time: 1:59 PM
  */
 
-class Controller
+class Controller implements ControllerInterface
 {
     /**
      * @var Board GameOfLife\Models\Board

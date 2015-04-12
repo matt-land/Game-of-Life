@@ -36,7 +36,7 @@ class Board
             $string .= PHP_EOL;
         }
 
-        return $string;
+        return $string . chr(27)."[39m".chr(27)."[49m";
     }
 
     public function NeighborCount($posX, $posY)

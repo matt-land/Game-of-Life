@@ -33,7 +33,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     {
         $controller = new Controller(20,20);
         $controller->setInitialStateRandom();
-        
+
         $string = $controller->show();
 
         for ($i = 0; $i < 10; $i++) {
