@@ -11,11 +11,11 @@ class LivingCellRules extends CellRules
     public function nextGenerationLifeStatus($neighborCount)
     {
         if ($neighborCount === 2) {
-            return 1;
+            return true;
         }
         if ($neighborCount === 3) {
-            return 1;
+            return true;
         }
-        parent::nextGenerationLifeStatus($neighborCount);
+        return parent::nextGenerationLifeStatus($neighborCount);
     }
 }

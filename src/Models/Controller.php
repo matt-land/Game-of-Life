@@ -5,19 +5,15 @@
  * Date: 4/12/15
  * Time: 1:59 PM
  */
-
 class Controller implements ControllerInterface
 {
     const UPDATE_FREQUENCY = 3333;
 
     private static $nextRenderTime;
 
-    /**
-     * @var Board GameOfLife\Models\Board
-     */
     private $currentBoard;
 
-    public function __construct(Board $board)
+    public function __construct(BoardInterface $board)
     {
         $this->currentBoard = $board;
     }
@@ -41,19 +37,9 @@ class Controller implements ControllerInterface
     {
         for ($posX = 0; $posX < $this->currentBoard->getLength(); $posX++) {
             for ($posY = 0; $posY < $this->currentBoard->getWidth(); $posY++) {
-                rand (0,1) ? $this->currentBoard->setCellLive($posX, $posY) : $this->currentBoard->setCellDead($posX, $posY);
+                rand(0,1) ? $this->currentBoard->setCellDead($posX, $posY) : $this->currentBoard->setCellLive($posX, $posY);
             }
         }
-    }
-
-    public function runAGeneration()
-    {
-        $this->currentBoard = $this->currentBoard->buildNextGeneration();
-    }
-
-    public function show()
-    {
-        return (string) $this->currentBoard;
     }
 
     public function run()
@@ -65,12 +51,11 @@ class Controller implements ControllerInterface
 
         //controls update speed
         $nextRender = function () {
-
             while (self::$nextRenderTime - (microtime(true) * 10000) > 0) {
                 usleep(10000);
             }
             self::$nextRenderTime += self::UPDATE_FREQUENCY;
-            echo $this->show();
+            echo $this->currentBoard->show();
 
             return;
         };
@@ -82,7 +67,7 @@ class Controller implements ControllerInterface
             if (fgets(STDIN)) {
                 $this->setInitialStateRandom();
             } else {
-                $this->runAGeneration();
+                $this->currentBoard = $this->currentBoard->buildNextGeneration();
             }
             $nextRender();
         }

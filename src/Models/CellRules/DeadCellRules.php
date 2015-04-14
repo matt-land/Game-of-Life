@@ -5,13 +5,13 @@
  * Date: 4/12/15
  * Time: 2:05 PM
  */
-
 class DeadCellRules extends CellRules
 {
     public function nextGenerationLifeStatus($neighborCount)
     {
         if ($neighborCount === 3) {
-            return 1;
+            return true;
         }
+        return false;
     }
 }

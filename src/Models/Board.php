@@ -1,4 +1,4 @@
-<?php
+<?php namespace GameOfLife\Models;
 /**
  * Created by IntelliJ IDEA.
  * User: blitzcat
@@ -6,10 +6,9 @@
  * Time: 2:00 PM
  */
 
-namespace GameOfLife\Models;
 use GameOfLife\Models\CellRules\DeadCellRules;
 use GameOfLife\Models\CellRules\LivingCellRules;
-class Board
+class Board implements BoardInterface
 {
     private $cells = array();
     private $length;
@@ -37,7 +36,7 @@ class Board
         $this->width = $width;
     }
 
-    public function  __toString()
+    public function show()
     {
         $string = chr(27) . "[2J" . chr(27) . "[;H"; //clear the screen
         for ($posX = 0 ; $posX < $this->getLength(); $posX++) {
@@ -75,7 +74,7 @@ class Board
     private function setCellStatus($posX, $posY, $state)
     {
         if (! isset($this->cells[$posX][$posY])) {
-            $this->cells[$posX][$posY] = false;
+            $this->cells[$posX][$posY] = true;
         }
         $this->cells[$posX][$posY] = (bool) $state;
     }

@@ -5,11 +5,10 @@
  * Date: 4/12/15
  * Time: 2:02 PM
  */
-
 abstract class CellRules
 {
     public function nextGenerationLifeStatus($neighborCount)
     {
-        return 0;
+        return false;
     }
 }

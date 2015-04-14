@@ -16,4 +16,5 @@ $board = new Board(
     isset($argv[2]) ? $argv[2] : shell_exec('tput cols')-1
 );
 $controller = new Controller($board);
+$controller->setInitialStateRandom();
 $controller->run();

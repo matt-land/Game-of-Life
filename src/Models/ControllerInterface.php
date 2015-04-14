@@ -1,4 +1,4 @@
-<?php
+<?php namespace GameOfLife\Models;
 /**
  * Created by IntelliJ IDEA.
  * User: blitzcat
@@ -6,17 +6,13 @@
  * Time: 3:47 PM
  */
 
-namespace GameOfLife\Models;
-
-
-interface ControllerInterface {
-
+interface ControllerInterface
+{
     public function setInitialStateRandom();
 
-    public function runAGeneration();
+    public function setInitialStateBlinker();
 
-    public function show();
+    public function setInitialStateSquare();
 
     public function run();
-
 }
