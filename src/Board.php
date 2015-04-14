@@ -38,15 +38,15 @@ class Board implements BoardInterface
 
     public function show()
     {
-        $string = chr(27) . "[2J" . chr(27) . "[;H"; //clear the screen
+        echo chr(27) . "[2J" . chr(27) . "[;H"; //clear the screen
         for ($posX = 0 ; $posX < $this->getLength(); $posX++) {
             for ($posY = 0 ; $posY < $this->getWidth(); $posY++) {
-                $string .=  chr(27) . ($this->getCellStatus($posX , $posY) ? "[47m".chr(27)."[30m " : "[40m ");
+                echo  chr(27) . ($this->getCellStatus($posX , $posY) ? "[47m".chr(27)."[30m " : "[40m ");
             }
-            $string .= PHP_EOL;
+            echo PHP_EOL;
         }
 
-        return $string . chr(27)."[39m".chr(27)."[49m";
+        echo chr(27)."[39m".chr(27)."[49m";
     }
 
     public function NeighborCount($posX, $posY)

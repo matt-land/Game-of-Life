@@ -7,7 +7,7 @@
  */
 class Controller implements ControllerInterface
 {
-    const UPDATE_FREQUENCY = 3333;
+    const UPDATE_FREQUENCY = 1000;
 
     private static $nextRenderTime;
 
@@ -55,7 +55,7 @@ class Controller implements ControllerInterface
                 usleep(10000);
             }
             self::$nextRenderTime += self::UPDATE_FREQUENCY;
-            echo $this->currentBoard->show();
+            $this->currentBoard->show();
 
             return;
         };
