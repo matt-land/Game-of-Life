@@ -1,16 +1,18 @@
 {
     "name": "matt-land/Game-of-Life",
     "description": "Conway's Game of Life",
+    "license": "MIT",
     "authors": [
         {
             "name": "Matt Land",
             "email": "matt-land@users.noreply.github.com"
         }
     ],
+    "require": {},
     "require-dev": {
         "phpunit/phpunit": "4.6.*"
     },
     "autoload": {
-        "psr-0": { "GameOfLife": "src/", "GameOfLifeTest": "tests/" }
+        "psr-4": { "GameOfLife\\": "src/", "GameOfLifeTest\\": "tests/" }
     }
 }
