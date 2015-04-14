@@ -17,4 +17,6 @@ interface ControllerInterface {
 
     public function show();
 
+    public function run();
+
 }

@@ -14,7 +14,7 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $board = new Board(4, 4);
         for ($i = 0; $i < 4; $i++) {
             for ($j = 0; $j < 4; $j++) {
-                $this->assertEquals(0, $board->stateCheck($i, $j));
+                $this->assertEquals(0, $board->getCellStatus($i, $j));
             }
         }
 
@@ -22,35 +22,35 @@ class BoardTest extends \PHPUnit_Framework_TestCase
 
     public function testBoardSetter()
     {
-        $board = new Board(4, 4);
-        $board->setLive(1,1);
-        $this->assertEquals(1, $board->stateCheck(1,1));
-        $board->setLive(1,2);
-        $this->assertEquals(1, $board->stateCheck(1,2));
-        $board->setLive(2,1);
-        $this->assertEquals(1, $board->stateCheck(2,1));
-        $board->setLive(2,2);
-        $this->assertEquals(1, $board->stateCheck(2,2));
+        $board = new Board(2, 2);
+        $board->setCellLive(0,0);
+        $this->assertEquals(true, $board->getCellStatus(0,0));
+        $board->setCellLive(0,1);
+        $this->assertEquals(true, $board->getCellStatus(0,1));
+        $board->setCellLive(1,0);
+        $this->assertEquals(true, $board->getCellStatus(1,0));
+        $board->setCellLive(1,1);
+        $this->assertEquals(true, $board->getCellStatus(1,1));
     }
 
     public function testSetState()
     {
         $board = new Board(3, 3);
-        $board->setLive(2,2);
-        $this->assertEquals(1, $board->stateCheck(2,2));
+        $board->setCellLive(2,2);
+        $this->assertEquals(true, $board->getCellStatus(2,2));
     }
 
     public function testAskNeighbors()
     {
         $board = new Board(3, 3);
-        $this->assertEquals(0, $board->NeighborCount(1,1));
-        $this->assertEquals(0, $board->NeighborCount(2,2));
+        $this->assertEquals(false, $board->NeighborCount(1,1));
+        $this->assertEquals(false, $board->NeighborCount(2,2));
 
         $board = new Board(4, 4);
-        $board->setLive(1,1);
-        $board->setLive(1,2);
-        $board->setLive(2,1);
-        $board->setLive(2,2);
+        $board->setCellLive(1,1);
+        $board->setCellLive(1,2);
+        $board->setCellLive(2,1);
+        $board->setCellLive(2,2);
         $this->assertEquals(3, $board->NeighborCount(2,2));
     }
 }

@@ -14,38 +14,38 @@ class CellRulesTest extends \PHPUnit_Framework_TestCase
     {
         $cell = new LivingCellRules();
         $neighbors = 1;
-        $this->assertEquals(0, $cell->nextGenerationLifeStatus($neighbors));
+        $this->assertEquals(false, $cell->nextGenerationLifeStatus($neighbors));
 
         $cell = new DeadCellRules();
         $neighbors = 1;
-        $this->assertEquals(0, $cell->nextGenerationLifeStatus($neighbors));
+        $this->assertEquals(false, $cell->nextGenerationLifeStatus($neighbors));
     }
 
     public function testSurvival()
     {
         $cell = new LivingCellRules();
-        $this->assertEquals(1, $cell->nextGenerationLifeStatus(2), 'tested 2');
+        $this->assertEquals(true, $cell->nextGenerationLifeStatus(2), 'tested 2');
         $cell = new LivingCellRules();
-        $this->assertEquals(1, $cell->nextGenerationLifeStatus(3), 'tested 3');
+        $this->assertEquals(true, $cell->nextGenerationLifeStatus(3), 'tested 3');
     }
 
     public function testOverCrowding()
     {
         $cell = new LivingCellRules();
-        $this->assertEquals(0, $cell->nextGenerationLifeStatus(4), 'tested 4');
-        $this->assertEquals(0, $cell->nextGenerationLifeStatus(8), 'tested 8');
-        $this->assertEquals(0, $cell->nextGenerationLifeStatus(6), 'tested 6');
+        $this->assertEquals(false, $cell->nextGenerationLifeStatus(4), 'tested 4');
+        $this->assertEquals(false, $cell->nextGenerationLifeStatus(8), 'tested 8');
+        $this->assertEquals(false, $cell->nextGenerationLifeStatus(6), 'tested 6');
     }
 
     public function testUnderCrowdedDead()
     {
         $cell = new DeadCellRules();
-        $this->assertEquals(0, $cell->nextGenerationLifeStatus(2));
+        $this->assertEquals(false, $cell->nextGenerationLifeStatus(2));
     }
 
     public function testReproduction()
     {
         $cell = new DeadCellRules();
-        $this->assertEquals(1, $cell->nextGenerationLifeStatus(3));
+        $this->assertEquals(true, $cell->nextGenerationLifeStatus(3));
     }
 }

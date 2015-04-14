@@ -7,11 +7,12 @@
  */
 
 use GameOfLife\Models\Controller;
+use GameOfLife\Models\Board;
 class ControllerTest extends \PHPUnit_Framework_TestCase
 {
     public function testOneGeneration()
     {
-        $controller = new Controller();
+        $controller = new Controller(new Board(4,4));
         $controller->setInitialStateSquare();
         $before = $controller->show();
         $controller->runAGeneration();
@@ -20,7 +21,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testTenGenerations()
     {
-        $controller = new Controller();
+        $controller = new Controller(new Board(4,4));
         $controller->setInitialStateSquare();
         $before = $controller->show();
         for ($i = 0; $i < 10; $i++) {
@@ -31,7 +32,7 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testRandomGenerations()
     {
-        $controller = new Controller(20,20);
+        $controller = new Controller(new Board(20,20));
         $controller->setInitialStateRandom();
 
         $string = $controller->show();

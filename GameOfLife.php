@@ -8,13 +8,12 @@
  */
 require_once __DIR__ . '/src/autoload.php';
 
-use GameOfLife\Models\Game;
 use GameOfLife\Models\Controller;
+use GameOfLife\Models\Board;
 
-$controller = new Controller(
+$board = new Board(
     isset($argv[1]) ? $argv[1] : shell_exec('tput lines'),
     isset($argv[2]) ? $argv[2] : shell_exec('tput cols')-1
 );
-$controller->setInitialStateRandom();
-
-Game::run($controller);
+$controller = new Controller($board);
+$controller->run();

@@ -11,27 +11,38 @@ use GameOfLife\Models\CellRules\DeadCellRules;
 use GameOfLife\Models\CellRules\LivingCellRules;
 class Board
 {
-    public $array = array();
-    public  $length;
-    public  $width;
+    private $cells = array();
+    private $length;
+    private $width;
+
+    /**
+     * @return int
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
 
     public function __construct($length, $width)
     {
         $this->length = $length;
         $this->width = $width;
-        for ($i = 0 ; $i < $length; $i++) {
-            for ($j = 0 ; $j < $width; $j++) {
-                $this->array[$i][$j] = 0 ; //rand (0,1);
-            }
-        }
     }
 
     public function  __toString()
     {
         $string = chr(27) . "[2J" . chr(27) . "[;H"; //clear the screen
-        for ($i = 0 ; $i < $this->length; $i++) {
-            for ($j = 0 ; $j < $this->width; $j++) {
-                $string .=  chr(27) . ($this->stateCheck($i , $j) ? "[47m".chr(27)."[30m0" : "[40m ");
+        for ($posX = 0 ; $posX < $this->getLength(); $posX++) {
+            for ($posY = 0 ; $posY < $this->getWidth(); $posY++) {
+                $string .=  chr(27) . ($this->getCellStatus($posX , $posY) ? "[47m".chr(27)."[30m " : "[40m ");
             }
             $string .= PHP_EOL;
         }
@@ -42,59 +53,54 @@ class Board
     public function NeighborCount($posX, $posY)
     {
         return
-            $this->stateCheck($posX -1, $posY -1) +
-            $this->stateCheck($posX -1, $posY -0) +
-            $this->stateCheck($posX -1, $posY +1) +
-            $this->stateCheck($posX -0, $posY -1) +
+            $this->getCellStatus($posX -1, $posY -1) +
+            $this->getCellStatus($posX -1, $posY -0) +
+            $this->getCellStatus($posX -1, $posY +1) +
+            $this->getCellStatus($posX -0, $posY -1) +
             // skip middle sq
-            $this->stateCheck($posX -0, $posY +1) +
-            $this->stateCheck($posX +1, $posY -1) +
-            $this->stateCheck($posX +1, $posY -0) +
-            $this->stateCheck($posX +1, $posY +1);
+            $this->getCellStatus($posX -0, $posY +1) +
+            $this->getCellStatus($posX +1, $posY -1) +
+            $this->getCellStatus($posX +1, $posY -0) +
+            $this->getCellStatus($posX +1, $posY +1);
     }
 
-    public function stateCheck($posX, $posY)
+    public function getCellStatus($posX, $posY)
     {
-        if (! isset($this->array[$posX][$posY])) {
+        if (! isset($this->cells[$posX][$posY])) {
             return false;
         }
-        return $this->array[$posX][$posY];
+        return $this->cells[$posX][$posY];
     }
 
-    private function updateLifeStatus($posX, $posY, $boolState)
+    private function setCellStatus($posX, $posY, $state)
     {
-        if (! isset($this->array[$posX][$posY])) {
-            return;
+        if (! isset($this->cells[$posX][$posY])) {
+            $this->cells[$posX][$posY] = false;
         }
-        $this->array[$posX][$posY] = (int) $boolState;
+        $this->cells[$posX][$posY] = (bool) $state;
     }
 
-    public function setLive($posX, $posY)
+    public function setCellLive($posX, $posY)
     {
-        self::updateLifeStatus($posX, $posY, 1);
+        self::setCellStatus($posX, $posY, true);
     }
 
-    public function setDead($posX, $posY)
+    public function setCellDead($posX, $posY)
     {
-        self::updateLifeStatus($posX, $posY, 0);
+        self::setCellStatus($posX, $posY, false);
     }
 
-    public function nextGeneration()
+    public function buildNextGeneration()
     {
-        $nextBoard = new self($this->length, $this->width);
-        for ($i = 0 ; $i < $this->length; $i++) {
-            for ($j = 0; $j < $this->width; $j++) {
+        $nextBoard = clone($this);
+        for ($posX = 0; $posX < $this->getLength(); $posX++) {
+            for ($posY = 0; $posY < $this->getWidth(); $posY++) {
                 //do something
-                $cell = $this->stateCheck($i, $j) ? new LivingCellRules() : new DeadCellRules();
-                $nextBoard->updateLifeStatus(
-                    $i,
-                    $j,
-                    $cell->nextGenerationLifeStatus(
-                        $this->NeighborCount($i, $j)
-                    )
-                );
+                $cell = $this->getCellStatus($posX, $posY) ? new LivingCellRules() : new DeadCellRules();
+                $cell->nextGenerationLifeStatus($this->NeighborCount($posX, $posY)) ? $nextBoard->setCellLive($posX, $posY) : $nextBoard->setCellDead($posX, $posY);
             }
         }
+
         return $nextBoard;
     }
 }
