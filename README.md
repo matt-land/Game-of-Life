@@ -11,3 +11,6 @@ To run smaller grids, the script will accept command line arguments for width an
 Example:
 
 ./GameOfLife.php 10 30
+
+### Status
+[![Build Status](https://travis-ci.org/matt-land/Game-of-Life.png)](https://travis-ci.org/matt-land/Game-of-Life)
