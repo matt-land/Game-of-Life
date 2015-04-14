@@ -1,4 +1,4 @@
-<?php namespace GameOfLife\Models\CellRules;
+<?php namespace GameOfLife\CellRules;
 /**
  * Created by IntelliJ IDEA.
  * User: blitzcat

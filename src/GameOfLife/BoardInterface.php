@@ -1,4 +1,4 @@
-<?php namespace GameOfLife\Models;
+<?php namespace GameOfLife;
 /**
  * Created by IntelliJ IDEA.
  * User: mland

@@ -1,12 +1,12 @@
-<?php namespace GameOfLifeTest\Models\CellRules;
+<?php namespace GameOfLifeTest\CellRules;
 /**
  * Created by IntelliJ IDEA.
  * User: blitzcat
  * Date: 4/12/15
  * Time: 3:26 PM
  */
-use GameOfLife\Models\CellRules\LivingCellRules;
-use GameOfLife\Models\CellRules\DeadCellRules;
+use GameOfLife\CellRules\LivingCellRules;
+use GameOfLife\CellRules\DeadCellRules;
 
 class CellRulesTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,12 +1,12 @@
-<?php namespace GameOfLifeTest\Models;
+<?php namespace GameOfLifeTest;
 /**
  * Created by IntelliJ IDEA.
  * User: blitzcat
  * Date: 4/12/15
  * Time: 3:35 PM
  */
-use GameOfLife\Models\Board;
-use GameOfLife\Models\Controller;
+use GameOfLife\Board;
+use GameOfLife\Controller;
 
 class BoardTest extends \PHPUnit_Framework_TestCase
 {

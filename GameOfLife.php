@@ -6,10 +6,10 @@
  * Date: 11/15/14
  * Time: 9:49 AM
  */
-require_once __DIR__ . '/src/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-use GameOfLife\Models\Controller;
-use GameOfLife\Models\Board;
+use GameOfLife\Controller;
+use GameOfLife\Board;
 
 $board = new Board(
     isset($argv[1]) ? $argv[1] : shell_exec('tput lines'),

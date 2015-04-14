@@ -1,4 +1,4 @@
-<?php namespace GameOfLife\Models;
+<?php namespace GameOfLife;
 /**
  * Created by IntelliJ IDEA.
  * User: blitzcat
@@ -6,8 +6,8 @@
  * Time: 2:00 PM
  */
 
-use GameOfLife\Models\CellRules\DeadCellRules;
-use GameOfLife\Models\CellRules\LivingCellRules;
+use GameOfLife\CellRules\DeadCellRules;
+use GameOfLife\CellRules\LivingCellRules;
 class Board implements BoardInterface
 {
     private $cells = array();

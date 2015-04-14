@@ -1,4 +1,4 @@
-<?php namespace GameOfLifeTest\Models;
+<?php namespace GameOfLifeTest;
 /**
  * Created by IntelliJ IDEA.
  * User: blitzcat
