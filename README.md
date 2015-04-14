@@ -1,4 +1,4 @@
-# gameOfLife
+# Game of Life
 This is a PHP implementation of Conway's Game of Life. 
 
 The code was originally written as a mob programming experiment during Global Day of Coderetreat, November 15, 2014, in Austin, TX
