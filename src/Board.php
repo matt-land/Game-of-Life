@@ -49,6 +49,18 @@ class Board implements BoardInterface
         echo chr(27)."[39m".chr(27)."[49m";
     }
 
+    public function __toString()
+    {
+        $string = '';
+        for ($posX = 0 ; $posX < $this->getLength(); $posX++) {
+            for ($posY = 0 ; $posY < $this->getWidth(); $posY++) {
+                $string .= (int) $this->getCellStatus($posX , $posY);
+            }
+            $string .= PHP_EOL;
+        }
+        return $string;
+    }
+
     public function NeighborCount($posX, $posY)
     {
         return

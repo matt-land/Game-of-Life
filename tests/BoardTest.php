@@ -66,9 +66,9 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $board = new Board(4,4);
         $controller = new Controller($board);
         $controller->setInitialStateSquare();
-        $before = $board->show();
+        $before = (string) $board;
         $board = $board->buildNextGeneration();
-        $this->assertEquals($before, $board->show());
+        $this->assertEquals($before, (string) $board);
     }
 
     public function testTenGenerations()
@@ -76,11 +76,11 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $board = new Board(4,4);
         $controller = new Controller($board);
         $controller->setInitialStateSquare();
-        $before = $board->show();
+        $before = (string) $board;
         for ($i = 0; $i < 10; $i++) {
             $board = $board->buildNextGeneration();
         }
-        $this->assertEquals($before, $board->show());
+        $this->assertEquals($before, (string) $board);
     }
 
     public function testRandomGenerations()
@@ -89,11 +89,11 @@ class BoardTest extends \PHPUnit_Framework_TestCase
         $controller = new Controller($board);
         $controller->setInitialStateRandom();
 
-        $string = $board->show();
+        $string = (string)$board;
 
         for ($i = 0; $i < 10; $i++) {
             $board = $board->buildNextGeneration();
-            $this->assertNotEquals($string, $board->show());
+            $this->assertNotEquals($string, (string)$board);
         }
     }
 
