@@ -1,7 +1,17 @@
-<phpunit bootstrap="tests/bootstrap.php">
+<phpunit bootstrap="tests/bootstrap.php"
+        colors="true"
+         coverage-html="true">
+
     <testsuites>
         <testsuite name="GameOfLifeTests">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <logging>
+        <log type="junit" target="junit.xml"/>
+        <!-- <log type="json" target="testlog.json"/> -->
+        <log type="coverage-html" target="codeCoverage" charset="UTF-8"
+            yui="true" highlight="true"
+            lowUpperBound="50" highLowerBound="80"/>
+    </logging>
 </phpunit>
