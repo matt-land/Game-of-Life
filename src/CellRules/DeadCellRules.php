@@ -7,7 +7,7 @@
  */
 class DeadCellRules extends CellRules
 {
-    public function nextGenerationLifeStatus($neighborCount)
+    public static function nextGenerationLifeStatus($neighborCount)
     {
         if ($neighborCount === 3) {
             return true;

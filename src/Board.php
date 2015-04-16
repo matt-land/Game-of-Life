@@ -64,15 +64,17 @@ class Board implements BoardInterface
     public function NeighborCount($posX, $posY)
     {
         return
-            $this->getCellStatus($posX -1, $posY -1) +
-            $this->getCellStatus($posX -1, $posY -0) +
-            $this->getCellStatus($posX -1, $posY +1) +
-            $this->getCellStatus($posX -0, $posY -1) +
-            // skip middle sq
-            $this->getCellStatus($posX -0, $posY +1) +
-            $this->getCellStatus($posX +1, $posY -1) +
-            $this->getCellStatus($posX +1, $posY -0) +
-            $this->getCellStatus($posX +1, $posY +1);
+            $this->getCellStatus($posX -1, $posY -1) + //bottom left
+            $this->getCellStatus($posX -1, $posY -0) + //bottom middle
+            $this->getCellStatus($posX -1, $posY +1) + //bottom right
+
+            $this->getCellStatus($posX -0, $posY -1) + //middle left
+                                                       //middle sq (skip $this)
+            $this->getCellStatus($posX -0, $posY +1) + //middle right
+
+            $this->getCellStatus($posX +1, $posY -1) + //top left
+            $this->getCellStatus($posX +1, $posY -0) + //top middle
+            $this->getCellStatus($posX +1, $posY +1);  //top right
     }
 
     public function getCellStatus($posX, $posY)
@@ -107,8 +109,10 @@ class Board implements BoardInterface
         for ($posX = 0; $posX < $this->getLength(); $posX++) {
             for ($posY = 0; $posY < $this->getWidth(); $posY++) {
                 //do something
-                $cell = $this->getCellStatus($posX, $posY) ? new LivingCellRules() : new DeadCellRules();
-                $cell->nextGenerationLifeStatus($this->NeighborCount($posX, $posY)) ? $nextBoard->setCellLive($posX, $posY) : $nextBoard->setCellDead($posX, $posY);
+                $cell = $this->getCellStatus($posX, $posY) ?
+                    new LivingCellRules() : new DeadCellRules();
+                $cell->nextGenerationLifeStatus($this->NeighborCount($posX, $posY)) ?
+                    $nextBoard->setCellLive($posX, $posY) : $nextBoard->setCellDead($posX, $posY);
             }
         }
 

@@ -7,7 +7,7 @@
  */
 abstract class CellRules
 {
-    public function nextGenerationLifeStatus($neighborCount)
+    public static function nextGenerationLifeStatus($neighborCount)
     {
         return false;
     }

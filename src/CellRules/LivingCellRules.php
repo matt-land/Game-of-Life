@@ -8,7 +8,7 @@
 
 class LivingCellRules extends CellRules
 {
-    public function nextGenerationLifeStatus($neighborCount)
+    public static function nextGenerationLifeStatus($neighborCount)
     {
         if ($neighborCount === 2) {
             return true;
