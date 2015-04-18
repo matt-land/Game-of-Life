@@ -14,3 +14,4 @@ Example:
 
 ### Status
 [![Build Status](https://travis-ci.org/matt-land/Game-of-Life.png)](https://travis-ci.org/matt-land/Game-of-Life)
+[![Code Climate](https://codeclimate.com/github/matt-land/Game-of-Life/badges/gpa.svg)](https://codeclimate.com/github/matt-land/Game-of-Life)
